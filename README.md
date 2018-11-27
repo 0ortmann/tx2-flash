@@ -29,8 +29,7 @@ Everything is in the AUR.
 
 #### 1.2 Spin up an Ubuntu VM
 
-Download Ubuntu 16.04 iso image from [here](http://releases.ubuntu.com/16.04/ubuntu-16.04.5-desktop-amd64.iso).
-This confirmed works with 14.04, see the original version of this guide: https://github.com/KleinYuan/tx2-flash
+Download Ubuntu 16.04 iso image from [here](http://releases.ubuntu.com/16.04/ubuntu-16.04.5-desktop-amd64.iso). I tested it with Arch Linux (4.19.2-arch1-1-ARCH). This also confirmed works with 14.04 on Mac OS, see the original version of this guide: https://github.com/KleinYuan/tx2-flash
 
 Then, create an ubuntu machine with following settings:
 
@@ -48,24 +47,23 @@ Last, load the image that you just downloaded and spin up an VM.
 
 In the VM, open firefox browser and go to NVIDIA's official [website](https://developer.nvidia.com/embedded/jetpack) and join them as a member so that you can download the JetPack.
 
-In my case, I downloaded JetPack 3.1 (includes TensorRT2.1, cuDNN 6.0, VisionWorks 1.6, CUDA 8.0, Multimedia API, L4T, Development tools).
+I downloaded JetPack 3.3, but this also confirmed works for JetPack 3.1.
 
-You are expected to find a file called `JetPack-L4T-3.1-linux-x64.run` under `Downloads` folder.
+You are expected to find a file called `JetPack-L4T-3.3-linux-x64_b39.run` under `Downloads` folder.
 
 #### 1.4 Install JetPack
 
 Open a terminal and navigate to Downloads folder, then change .run file as executable:
 
 ```
-cd
 cd ~/Downloads
-chmod +x ./JetPack-L4T-3.1-linux-x64.run
+chmod +x ./JetPack-L4T-3.3-linux-x64_b39.run
 ```
 
 Then, run the .run file:
 
 ```
-./JetPack-L4T-3.1-linux-x64.run
+./JetPack-L4T-3.3-linux-x64_b39.run
 
 ```
 
