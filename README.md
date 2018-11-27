@@ -40,7 +40,7 @@ Then, create an ubuntu machine with following settings:
 
 - [X] Go to Settings --> Ports --> USB, ensure `Enable USB Controller` is under `USB 3.0 (xHCI) Controller`
 
-You don't have to continue in bridge mode, but it is easier.
+You don't have to continue in bridge mode, but it is easier (see [below](#####When-the-VM-is-not-in-bridge-mode)).
 
 Last, load the image that you just downloaded and spin up an VM.
 
