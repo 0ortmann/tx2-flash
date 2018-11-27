@@ -6,13 +6,9 @@ Therefore, this is all about how to flash into TX2 with an VM (VirtualBox) on Ma
 
 ## 1. Pre-requisites
 
-- [X] A mac desktop connected with Wi-Fi
+- [X] A computer running VirtualBox with access to the internet (eg. Arch Linux, Mac OS)
 
-- [X] macOS Sierra 10.12.5 + (Not necessary this version, but this is what I tested)
-
-- [X] access to internet and power (You can't do this locally)
-
-- [X] NVIDIA TX2
+- [X] NVIDIA TX2 with _wired_ access to the internet and power (You can't do this locally)
 
 - [X] A monitor, HDMI Cable, Ethernet Cable, one Keyboard (USB plugged in), one mouse (preferrable), one USB hub (preferrable)
 
@@ -20,17 +16,21 @@ Therefore, this is all about how to flash into TX2 with an VM (VirtualBox) on Ma
 
 #### 1.1 Install Virtual Box
 
+You need VirtualBox _and_ the extension pack. Extension is needed to enable USB-2/USB-3 connection/communications between any physical USB device and the virtual machine.
+
+##### Mac OS
 Download Virtual Box for Mac from [here](http://download.virtualbox.org/virtualbox/5.1.28/VirtualBox-5.1.28-117968-OSX.dmg) and install it first; 
 
 Then download Virtual Box extension [here](http://download.virtualbox.org/virtualbox/5.1.28/Oracle_VM_VirtualBox_Extension_Pack-5.1.28-117968.vbox-extpack) and install it;
 
-Extension is needed to enable USB-2/USB-3 connection/communications between any physical USB device and the virtual machine.
+##### Arch Linux
+
+Everything is in the AUR.
 
 #### 1.2 Spin up an Ubuntu VM
 
-Download Ubuntu 14.04 iso image from [here](http://releases.ubuntu.com/14.04/ubuntu-14.04.5-desktop-amd64.iso).
-
-(Ubuntu 16.04 may also work, even I haven't tried it on my own. But here's a [proof](https://devtalk.nvidia.com/default/topic/1002081/jetson-tx2/jetpack-3-0-install-with-a-vm/post/5210987/#5210987) that Ubuntu 16.04 should also work.)
+Download Ubuntu 16.04 iso image from [here](http://releases.ubuntu.com/16.04/ubuntu-16.04.5-desktop-amd64.iso).
+This confirmed works with 14.04, see the original version of this guide: https://github.com/KleinYuan/tx2-flash
 
 Then, create an ubuntu machine with following settings:
 
@@ -39,6 +39,8 @@ Then, create an ubuntu machine with following settings:
 - [X] Go to Settings --> Network --> Adapter 1, change `Attached to` to `Bridged Adapter`, and name to whatever under Wi-Fi
 
 - [X] Go to Settings --> Ports --> USB, ensure `Enable USB Controller` is under `USB 3.0 (xHCI) Controller`
+
+You don't have to continue in bridge mode, but it is easier.
 
 Last, load the image that you just downloaded and spin up an VM.
 
@@ -88,8 +90,22 @@ And now, here's the tricky part:
 
 - [X] Last, go back to your VM, do `Press Enter` on the terminal
 
-And, go and grab a coffee, it will take around 30 min to complete the entire process.
 
+##### When the VM is not in bridge mode:
+
+The TX2 will boot up after flashing kernel and OS. The install script will wait for the TX2 to report its IP address to the host. When you do not have bridge mode your VM is not routable from the internet and TX2 cannot report its IP.
+
+Thus you have to provide the IP of TX2 manually.
+
+- [X] Figure out the IP of the TX2 (login the booted up TX2 with default password):
+  
+  $ ip addr show eth0
+
+- [X] Back inside the VM, pass the IP to the install script:
+
+  $ echo <IP-of-TX2-target> | nc 127.0.0.1 33338
+  
+And, go and grab a coffee, it will take around 30 min to complete the entire process.
 
 #### 1.5 Validation Flash
 
